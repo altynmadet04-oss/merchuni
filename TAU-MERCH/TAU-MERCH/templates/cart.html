@@ -1,0 +1,36 @@
+
+{% extends "base.html" %}
+
+{% block title %}Корзина | TAU MERCH{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <p class="eyebrow">YOUR SHOPPING BAG</p>
+    <h1>Корзина</h1>
+
+    {% if items %}
+        {% for item in items %}
+        <div class="cart-item">
+            <div>
+                <h3>{{ item.product.name }}</h3>
+                <p>Размер: {{ item.size }}</p>
+                <p>{{ "{:,}".format(item.product.price).replace(",", " ") }} ₸</p>
+            </div>
+            <a href="/remove/{{ loop.index0 }}" class="remove">Удалить</a>
+        </div>
+        {% endfor %}
+
+        <h2 class="total">Итого: {{ "{:,}".format(total).replace(",", " ") }} ₸</h2>
+
+        <form action="/checkout" method="POST" class="checkout-form">
+            <h2>Оформление заказа</h2>
+            <input name="name" placeholder="Ваше имя" required>
+            <input name="phone" type="tel" placeholder="Номер телефона" required>
+            <button class="btn" type="submit">Оформить заказ</button>
+        </form>
+    {% else %}
+        <p>Ваша корзина пока пуста.</p>
+        <a href="/" class="btn">Перейти в каталог</a>
+    {% endif %}
+</section>
+{% endblock %}

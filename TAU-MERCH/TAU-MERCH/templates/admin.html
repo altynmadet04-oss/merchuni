@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+    <p class="eyebrow">MANAGEMENT</p>
+    <h1>Панель администратора</h1>
+    <a href="/logout" class="remove">Выйти</a>
+
+    <h2>Список товаров</h2>
+
+    <div class="admin-list">
+        {% for product in products %}
+        <div class="cart-item">
+            <div>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.category }}</p>
+                <p>{{ product.price }} ₸</p>
+                <p>Размеры: {{ product.sizes | join(", ") }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
